@@ -1,0 +1,1 @@
+export const backgroundImage = 'https://www.lakepowell.com/media/31858/houseboat-beached-scenic_1000x667.jpg'
