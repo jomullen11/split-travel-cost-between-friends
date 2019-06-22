@@ -54,6 +54,10 @@ function App() {
         return(personPriceArray.join(",  "))
       }
 
+      const removeLastPerson = () => {
+        return people.pop()
+      }
+
       const calculateTotals = () => {
           alert(personDisplay())
           return(
@@ -69,16 +73,16 @@ function App() {
     return(
         <div className='container'>
             {/* <!-- Button trigger modal --> */}
-            <form className='cost-input d-flex  justify-content-center flex-column homeForm'>
+            <form className='homeForm d-flex justify-content-center flex-column homeForm'>
                 <input type="number" name='Total Cost' value={cost} placeholder='Total Cost of Trip' {...bindCostInput} min='500' max='1000000' required /> <br/>
                 <button type="submit" className="btn btn-primary home-button" data-toggle="modal" data-target="#homeModal" onClick={totalCostSubmit}>
-                Start Calculating!
+                Set Cost and Start Calculating!
                 </button>
                 <button type="button" class="btn btn-light mt-2 mx-5 d-flex justify-content-center" data-toggle='modal' data-target="#homeModal" style={{color: 'black', backgroundColor: 'rgba(192, 192, 192, 0.5)'}}>Open Calculator</button>
             </form>
 
             {/* <!-- Modal --> */}
-            <div className="modal fade" id="homeModal" tabIndex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+            <div className="modal fade" id="homeModal" style={{backgroundColor: 'rgba(275, 160, 148, 0.1)'}} tabIndex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered" role="document">
                 <div className="modal-content">
                 <div className="modal-header">
@@ -90,7 +94,7 @@ function App() {
                 <div className="modal-body">
                   <div className="modal-inputs d-flex justify-content-between">
                     <form onSubmit={handleSubmit}>
-                        <input type="text" className="active" name="Name" value={person} placeholder='Name' style={{width: '15vw'}} {...bindPersonInput} required/> <br />
+                        <input type="text" className="active" name="Name" value={person} placeholder='Name' style={{width: '15vw'}} {...bindPersonInput} required focus/> <br />
                         <input type="number" name="Days Stayed" value={days} placeholder='# of days stayed' style={{width: '15vw'}} {...bindDaysInput} min='1' max='7' required /> <br />
                         <input type="submit" value="Submit" onClick={setPeopleArray}/>
                     </form>
@@ -109,8 +113,11 @@ function App() {
                     </div>
                   </div>
                     <div className='d-flex flex-column'>
+                        <p>{people[((people.length) - 1)]} has successfully been added</p>
                         <p>You have added {people.join(', ')} <br/> A total of {people.length} people</p>
-                        <p>Your current cost is {cost} < br/> To change cost, please go back to the home screen </p>
+                        <p>Your current cost is {cost}</p>
+                        {/* <button type='button' value='Remove Last Person' onClick={removeLastPerson()}>Remove Last Person</button> */}
+
                     </div>
                 </div>
                 <div className="modal-footer">

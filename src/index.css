@@ -17,7 +17,7 @@ html body{
   /* background-image: url('https://www.lakepowell.com/media/31858/houseboat-beached-scenic_1000x667.jpg'); */
   background-size: cover;
   height: 100%;
-  width: auto;
+  width: 100%;
   background-repeat: repeat-y;
 }
 
@@ -26,14 +26,10 @@ code {
     monospace;
 }
 
-.cost-input{
-  margin-top: 40%;
-  z-index: 1;
-}
-
 .homeForm{
-  background-color: rgba(255, 255, 255, 0.2);
+  margin-top: 20%;
   padding: 10%;
+  background-color: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 5%;
 }
