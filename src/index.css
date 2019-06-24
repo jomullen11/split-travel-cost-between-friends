@@ -14,7 +14,6 @@ html{
 
 html body{
   background-image: url('https://stmed.net/sites/default/files/lake-powell-wallpapers-27923-564999.jpg');
-  /* background-image: url('https://www.lakepowell.com/media/31858/houseboat-beached-scenic_1000x667.jpg'); */
   background-size: cover;
   height: 100%;
   width: 100%;
@@ -32,4 +31,10 @@ code {
   background-color: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 5%;
+}
+
+.modal {
+  background-image: url('https://stmed.net/sites/default/files/lake-powell-wallpapers-27923-7071856.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }

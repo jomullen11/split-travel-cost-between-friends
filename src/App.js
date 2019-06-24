@@ -47,7 +47,7 @@ function App() {
     
       // pushing both arrays into a single array to produce a string
       for (var i = 0; i < people.length; i++) {
-        personPriceArray.push( people[i] + ' owes ' + (pricePerDayPerPerson * daysPerPerson[i]));
+        personPriceArray.push( people[i] + ' owes ' + (pricePerDayPerPerson * daysPerPerson[i]).toFixed(2));
       }
     
       const personDisplay = () => {
@@ -55,14 +55,11 @@ function App() {
       }
 
       const removeLastPerson = () => {
-        return people.pop()
+        return people.splice()
       }
 
       const calculateTotals = () => {
           alert(personDisplay())
-          return(
-              console.log(personDisplay())
-          )
       }
     
       useEffect(() => {
@@ -114,9 +111,10 @@ function App() {
                   </div>
                     <div className='d-flex flex-column'>
                         <p>{people[((people.length) - 1)]} has successfully been added</p>
-                        <p>You have added {people.join(', ')} <br/> A total of {people.length} people</p>
+                        {/* <p>You have added {people.join(', ')} </p> */}
+                         <p>A total of {people.length} people</p>
                         <p>Your current cost is {cost}</p>
-                        {/* <button type='button' value='Remove Last Person' onClick={removeLastPerson()}>Remove Last Person</button> */}
+                        <button type='button' value='Remove Last Person' onClick={removeLastPerson()}>Remove Last Person</button>
 
                     </div>
                 </div>
