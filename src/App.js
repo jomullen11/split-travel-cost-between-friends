@@ -29,7 +29,6 @@ function App() {
       const totalCostSubmit = (event) => {
         event.preventDefault()
         setCost(costInput)
-        // resetCostInput()
       }
 
       const costUpdateSubmit = (event) => {
@@ -111,7 +110,7 @@ function App() {
                   </div>
                     <div className='d-flex flex-column'>
                         <p>{people[((people.length) - 1)]} has successfully been added</p>
-                        {/* <p>You have added {people.join(', ')} </p> */}
+                        <p>You have added {people.join(', ')} </p>
                          <p>A total of {people.length} people</p>
                         <p>Your current cost is {cost}</p>
                         <button type='button' value='Remove Last Person' onClick={removeLastPerson()}>Remove Last Person</button>
