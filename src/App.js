@@ -113,7 +113,7 @@ function App() {
                   </div>
                     <div className='d-flex flex-column'>
                         <p>{ people.length > 1 ? people[((people.length) - 1)] + ' has successfully been added' : null } <br/>
-                        { people.length > 1 ? 'A total of ' + people.length + ' people' : null }</p>
+                        { people.length > 1 ? 'A total of ' + (people.length - 1)  + ' people' : null }</p>
                         <p>{personAndDaysDisplayArray} </p>
                         <p>Your current cost is {cost}</p>
 
