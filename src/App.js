@@ -6,14 +6,15 @@ import './index.css';
 function App() {
     const { value:person, bind:bindPersonInput, reset:resetPersonInput } = useInput('');
     const { value:days, bind:bindDaysInput, reset: resetDaysInput } = useInput();
-    const { value:costInput, bind:bindCostInput, reset:resetCostInput } = useInput();
-    const { value:costUpdate, bind:bindCostUpdate, reset:resetCostUpdate } = useInput();
+    const { value:costInput, bind:bindCostInput } = useInput();
+    const { value:costUpdate, bind:bindCostUpdate } = useInput();
     const [cost, setCost] = useState(1500)
-    const [people, setPeople] = useState(['Jordan', 'Sarah'])
-    const [daysPerPerson, setDaysPerPerson] = useState([5, 3])
-    const [totalDays, setTotalDays] = useState(5)
+    const [people, setPeople] = useState([''])
+    const [daysPerPerson, setDaysPerPerson] = useState([0])
+    const [totalDays, setTotalDays] = useState(0)
     const [pricePerDayPerPerson, setPricePerDayPerPerson] = useState(0)
     let  personPriceArray = []
+    let personAndDaysDisplayArray = []
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -36,6 +37,7 @@ function App() {
         setCost(costUpdate)
       }
     
+      // is used for calculating the average price
       const calculateTotalDaysPerPeople = () => {
         setTotalDays(daysPerPerson.reduce((a, b) => a + b))
       }
@@ -44,17 +46,18 @@ function App() {
         setPricePerDayPerPerson(cost / totalDays)
       }
     
-      // pushing both arrays into a single array to produce a string
-      for (var i = 0; i < people.length; i++) {
+      // pushing both arrays into a single array to produce a string for the popup alert
+      for (var i = 1; i < people.length; i++) {
         personPriceArray.push( people[i] + ' owes ' + (pricePerDayPerPerson * daysPerPerson[i]).toFixed(2));
       }
     
+      // pushing peopls and the amount of days their seeing for user experience
+      for (var p = 1; p < people.length; p++) {
+        personAndDaysDisplayArray.push( people[p] + ' is staying ' + daysPerPerson[p] + ' days, ' )
+      }
+      
       const personDisplay = () => {
         return(personPriceArray.join(",  "))
-      }
-
-      const removeLastPerson = () => {
-        return people.splice()
       }
 
       const calculateTotals = () => {
@@ -74,7 +77,7 @@ function App() {
                 <button type="submit" className="btn btn-primary home-button" data-toggle="modal" data-target="#homeModal" onClick={totalCostSubmit}>
                 Set Cost and Start Calculating!
                 </button>
-                <button type="button" class="btn btn-light mt-2 mx-5 d-flex justify-content-center" data-toggle='modal' data-target="#homeModal" style={{color: 'black', backgroundColor: 'rgba(192, 192, 192, 0.5)'}}>Open Calculator</button>
+                <button type="button" className="btn btn-light mt-2 mx-5 d-flex justify-content-center" data-toggle='modal' data-target="#homeModal" style={{color: 'black', backgroundColor: 'rgba(192, 192, 192, 0.5)'}}>Open Calculator</button>
             </form>
 
             {/* <!-- Modal --> */}
@@ -90,15 +93,15 @@ function App() {
                 <div className="modal-body">
                   <div className="modal-inputs d-flex justify-content-between">
                     <form onSubmit={handleSubmit}>
-                        <input type="text" className="active" name="Name" value={person} placeholder='Name' style={{width: '15vw'}} {...bindPersonInput} required focus/> <br />
+                        <input type="text" className="active" name="Name" value={person} placeholder='Name' style={{width: '15vw'}} {...bindPersonInput} required /> <br />
                         <input type="number" name="Days Stayed" value={days} placeholder='# of days stayed' style={{width: '15vw'}} {...bindDaysInput} min='1' max='7' required /> <br />
                         <input type="submit" value="Submit" onClick={setPeopleArray}/>
                     </form>
-                    <div class="dropdown" id='costUpdateDropdown'>
-                      <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div className="dropdown" id='costUpdateDropdown'>
+                      <button className="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Update Cost
                       </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <form className='cost-input d-flex justify-content-center flex-column m-0'>
                           <input type="number" className='mx-1' name='Total Cost' value={cost} {...bindCostUpdate} min='500' max='1000000' required /> <br/>
                           <button type="submit" className="btn btn-info mx-1 p-1" onClick={costUpdateSubmit} data-toggle='dropdown' data-target="#costUpdateDropdown" >
@@ -109,11 +112,10 @@ function App() {
                     </div>
                   </div>
                     <div className='d-flex flex-column'>
-                        <p>{people[((people.length) - 1)]} has successfully been added</p>
-                        <p>You have added {people.join(', ')} </p>
-                         <p>A total of {people.length} people</p>
+                        <p>{ people.length > 1 ? people[((people.length) - 1)] + ' has successfully been added' : null } <br/>
+                        { people.length > 1 ? 'A total of ' + people.length + ' people' : null }</p>
+                        <p>{personAndDaysDisplayArray} </p>
                         <p>Your current cost is {cost}</p>
-                        <button type='button' value='Remove Last Person' onClick={removeLastPerson()}>Remove Last Person</button>
 
                     </div>
                 </div>
