@@ -21,12 +21,12 @@ function App() {
         resetPersonInput()
         resetDaysInput()
       }
-    
+
       const setPeopleArray = () => {
         setPeople([...people, person])
         setDaysPerPerson([...daysPerPerson, parseInt(days)])
       }
-    
+
       const totalCostSubmit = (event) => {
         event.preventDefault()
         setCost(costInput)
@@ -36,26 +36,26 @@ function App() {
         event.preventDefault()
         setCost(costUpdate)
       }
-    
+
       // is used for calculating the average price
       const calculateTotalDaysPerPeople = () => {
         setTotalDays(daysPerPerson.reduce((a, b) => a + b))
       }
-    
+
       const calculatePricePerDayPerPerson = () => {
         setPricePerDayPerPerson(cost / totalDays)
       }
-    
+
       // pushing both arrays into a single array to produce a string for the popup alert
       for (var i = 1; i < people.length; i++) {
         personPriceArray.push( people[i] + ' owes ' + (pricePerDayPerPerson * daysPerPerson[i]).toFixed(2));
       }
-    
+
       // pushing peopls and the amount of days their seeing for user experience
       for (var p = 1; p < people.length; p++) {
         personAndDaysDisplayArray.push( people[p] + ' is staying ' + daysPerPerson[p] + ' days, ' )
       }
-      
+
       const personDisplay = () => {
         return(personPriceArray.join(",  "))
       }
@@ -63,7 +63,7 @@ function App() {
       const calculateTotals = () => {
           alert(personDisplay())
       }
-    
+
       useEffect(() => {
         calculateTotalDaysPerPeople()
         calculatePricePerDayPerPerson()
@@ -93,8 +93,8 @@ function App() {
                 <div className="modal-body">
                   <div className="modal-inputs d-flex justify-content-between">
                     <form onSubmit={handleSubmit}>
-                        <input type="text" className="active" name="Name" value={person} placeholder='Name' style={{width: '15vw'}} {...bindPersonInput} required /> <br />
-                        <input type="number" name="Days Stayed" value={days} placeholder='# of days stayed' style={{width: '15vw'}} {...bindDaysInput} min='1' max='7' required /> <br />
+                        <input type="text" className="active nameInput" name="Name" value={person} placeholder='Name' style={{width: '15vw'}} {...bindPersonInput} required /> <br />
+                        <input type="number" className="daysInput" name="Days Stayed" value={days} placeholder='# of days stayed' style={{width: '15vw'}} {...bindDaysInput} min='1' max='7' required /> <br />
                         <input type="submit" value="Submit" onClick={setPeopleArray}/>
                     </form>
                     <div className="dropdown" id='costUpdateDropdown'>
